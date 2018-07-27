@@ -27,7 +27,10 @@ class Home extends MY_Controller {
 	public function index()
 	{
 		$userInfo = $this->userModel->userInfo(1,true);
+		
+		echo "<font color='red'>幸运之星</font>";
 		var_dump($userInfo);
+		
 		$this->assign('name','巴巴滴幸运');
 		$this->display('test.html');
 	}
