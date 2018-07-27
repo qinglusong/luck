@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.32, created on 2018-07-23 07:35:21
-  from '/data/www/htdocs/www.goodluck.com/application/views/test.html' */
+/* Smarty version 3.1.32, created on 2018-07-27 14:48:24
+  from '/data/wwwroot/www.babadi.top/application/views/test.html' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.32',
-  'unifunc' => 'content_5b558539135ea4_09681224',
+  'unifunc' => 'content_5b5ac0383c0692_02910439',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '14d56152da2fe705a368a5ddc2491c141f4be0c0' => 
+    'f3b323ed9cfea81d594167374f01f28e2542fff4' => 
     array (
-      0 => '/data/www/htdocs/www.goodluck.com/application/views/test.html',
-      1 => 1530697660,
+      0 => '/data/wwwroot/www.babadi.top/application/views/test.html',
+      1 => 1532673762,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5b558539135ea4_09681224 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5b5ac0383c0692_02910439 (Smarty_Internal_Template $_smarty_tpl) {
 ?><html>
 <head>
 <title><?php echo $_smarty_tpl->tpl_vars['name']->value;?>
