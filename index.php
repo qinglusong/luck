@@ -1,7 +1,7 @@
 <?php
 /**
  * CodeIgniter
- * qinglu
+ * qinglu 宋庆禄
  *
  * An open source application development framework for PHP
  *
