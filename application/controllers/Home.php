@@ -26,7 +26,7 @@ class Home extends MY_Controller {
 	}
 	public function index()
 	{	
-		if($_GET['redis']){
+		if(isset($_GET['redis'])){
 			$redis = new Redis();
                 	$redis->connect('127.0.0.1',6379);
                 	echo $redis->ping().'<br>';
