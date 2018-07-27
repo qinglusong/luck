@@ -25,7 +25,16 @@ class Home extends MY_Controller {
 		$this->load->model('userModel');
 	}
 	public function index()
-	{
+	{	
+		if($_GET['redis']){
+			$redis = new Redis();
+                	$redis->connect('127.0.0.1',6379);
+                	echo $redis->ping().'<br>';
+                	$redis->set('babadi','www.babadi.top');
+                
+                	$redis_res = $redis->get('babadi');
+                	echo "<font color='green'>".$redis_res."</font>";
+		}
 		$userInfo = $this->userModel->userInfo(1,true);
 		
 		echo "<font color='red'>幸运之星</font>";
