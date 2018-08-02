@@ -18,7 +18,7 @@ class LoginModel extends MY_Model {
 	public function getWxSessionKey($param){
 		
 		$info = array();
-		$info = $this->Global_func->curl_post($this->wxKeySessionUrl,$param);
+		$info = $this->global_func->curl_post($this->wxKeySessionUrl,$param);
 
 		return $info;
 	}
