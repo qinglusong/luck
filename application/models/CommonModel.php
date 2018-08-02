@@ -7,10 +7,12 @@
  */
 class CommonModel extends MY_Model {
 	private $_trans_flag = false;
-
+	public $redis;
 	function __construct() {
 		parent::__construct ();
 		$this->load->library("global_func");
+		$this->redis = new Redis();
+        $this->redis->connect('127.0.0.1',6379);
 	}
 	public function get_data_by_sql($sql) {
 		$res = $this->db->query ( $sql );

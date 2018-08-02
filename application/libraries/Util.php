@@ -318,59 +318,13 @@ class Util {
 	}
 
 	// 返回接口 success
-	public static function echo_format_return($code = _SUCCESS_, $array = array(), $message = '请求成功', $exit = 0) {
+	public static function echoFormatReturn($code = 200, $array = array(), $message = '请求成功', $exit = 0) {
 		$re = array (
 				'result' => $code,
 				'data' => $array,
 				'message' => $message,
-				'time_offset' => 0,
-				'sys_time' => SYS_TIME * 1000, 	// 毫秒
 		);
 
-
-		//add by wangbo8
-		if (class_exists('CI_Controller')) {
-			//获取数据
-			$CI = get_instance();
-			if ($CI instanceof CI_Controller) {
-				$CI->load->library('seed');
-				$ci_vars = get_object_vars($CI);
-				if (!empty($ci_vars['partner_id'])) {
-					if ($code == _SUCCESS_ || $code == _ERROR_BUT_NEED_NEW_) {
-						$seed_code = $CI->seed->generate_new_seed();
-					} else {
-						$seed_code = $CI->seed->get_old_seed();
-					}
-
-					is_array($re['data']) || $re['data'] = array();
-					$seed_code && $re['data']['seed'] = $seed_code;
-				}
-			}
-		}
-
-		// add by liule1, 1,29 2016
-		if (!empty($_REQUEST['timestamp'])) {
-			$timestamp = is_numeric($_REQUEST['timestamp']) ? $_REQUEST['timestamp'] : 0;
-			$re['time_offset'] = SYS_TIME * 1000 - $timestamp;
-		}
-
-		// xhprof begin
-		if (!empty($GLOBALS['xhprof'])) {
-			$data = xhprof_disable();   //返回运行数据
-
-			// xhprof_lib在下载的包里存在这个目录,记得将目录包含到运行的php代码中
-			include_once "xhprof_lib/utils/xhprof_lib.php";
-			include_once "xhprof_lib/utils/xhprof_runs.php";
-
-			$objXhprofRun = new XHProfRuns_Default();
-
-			// 第一个参数j是xhprof_disable()函数返回的运行信息
-			// 第二个参数是自定义的命名空间字符串(任意字符串),
-			// 返回运行ID,用这个ID查看相关的运行结果
-			$run_id = $objXhprofRun->save_run($data, "xhprof");
-			$re['xhprof_id'] = $run_id;
-			unset($GLOBALS['xhprof']);
-		}
 		if (defined('JSON_UNESCAPED_UNICODE')) {
 			echo json_encode ( $re, JSON_PARTIAL_OUTPUT_ON_ERROR | JSON_UNESCAPED_UNICODE );
 		} else {
