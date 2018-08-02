@@ -15,7 +15,7 @@ class LoginModel extends MY_Model {
 	/*
 	*获取微信sessionKey内容
 	*/
-	public function userInfo($param){
+	public function getWxSessionKey($param){
 		
 		$info = array();
 		$info = $this->Global_func->curl_post($this->wxKeySessionUrl,$param);
