@@ -25,7 +25,7 @@ class Login extends MY_Controller {
 	}
 	public function getWxSessionKey()
 	{	
-		$param = $_POST;
+		$param = $this->input->post();
 		$keyInfo = $this->loginModel->getWxSessionKey($param);
 		
 		Util::echoFormatReturn($code = 200, $keyInfo, $message = '请求成功', $exit = 0);

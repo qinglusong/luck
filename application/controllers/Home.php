@@ -25,7 +25,9 @@ class Home extends MY_Controller {
 		$this->load->model('userModel');
 	}
 	public function index()
-	{	
+	{
+		print_r($_SERVER);
+	
 		if(isset($_GET['redis'])){
 			$redis = new Redis();
                 	$redis->connect('127.0.0.1',6379);
