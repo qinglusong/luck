@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{$lang.home} - 友情链接</title>
+<link href="templates/public.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="images/jquery.form.min.js"></script>
+<script type="text/javascript" src="images/jquery.autotextarea.js"></script>
+</head>
+<body>
+<div id="dcWrap">
+ {include file="header.htm"}
+ <div id="dcLeft">{include file="menu.htm"}</div>
+ <div id="dcMain">
+   {include file="ur_here.htm"}
+   <div class="mainBox" style="{$workspace.height}">
+    <!-- {if $rec eq 'default'} 文章列表 -->
+    <h3><a href="{$action_link.href}" class="actionBtn add">{$action_link.text}</a>友情链接列表</h3>
+    <div class="filter">
+    <form action="friend.php" method="post">
+
+     <input name="keyword" type="text" class="inpMain" value="{$keyword}" size="20" />
+     <input name="submit" class="btnGray" type="submit" value="{$lang.btn_filter}" />
+    </form>
+    
+    </div>
+
+	
+    <div id="list">
+    <form name="action" method="post" action="friend.php?rec=action">
+    <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+     <tr>
+      <th width="22" align="center"><input name='chkall' type='checkbox' id='chkall' onclick='selectcheckbox(this.form)' value='check'></th>
+      <th width="40" align="center">编号</th>
+      <th align="left">标题</th>
+      
+      <th width="80" align="center">添加日期</th>
+      <th width="80" align="center">操作</th>
+     </tr>
+     <!-- {foreach from=$friend_list item=article} -->
+     <tr>
+      <td align="center"><input type="checkbox" name="checkbox[]" value="{$article.id}" /></td>
+      <td align="center">{$article.id}</td>
+      <td><a href="friend.php?rec=edit&id={$article.id}">{$article.title}</a></td>
+      <td align="center">{$article.add_time}</td>
+      <td align="center">
+       
+      <a href="friend.php?rec=edit&id={$article.id}">{$lang.edit}</a> | <a href="friend.php?rec=del&id={$article.id}">{$lang.del}</a>
+       
+      </td>
+     </tr>
+     <!-- {/foreach} -->
+    </table>
+    <div class="action">
+     <select name="action" onchange="douAction()">
+      <option value="0">{$lang.select}</option>
+      <option value="del_all">{$lang.del}</option>
+     </select>
+     
+     <input name="submit" class="btn" type="submit" value="{$lang.btn_execute}" />
+    </div>
+    </form>
+    </div>
+    <div class="clear"></div>
+    {include file="pager.htm"}
+    <!-- {/if} -->
+    <!-- {if $rec eq 'add' || $rec eq 'edit'} 友情链接添加或编辑 -->
+    <h3><a href="{$action_link.href}" class="actionBtn">{$action_link.text}</a>{$ur_here}</h3>
+    <form action="friend.php?rec={$form_action}" method="post" enctype="multipart/form-data">
+     <div class="formBasic">
+      <dl>
+       <dt>链接名称</dt>
+       <dd>
+        <input type="text" name="title" value="{$friend.title}" size="135" class="inpMain" />
+       </dd>
+      </dl>
+      
+      <dl>
+       <dt>链接地址</dt>
+       <dd>
+        <input type="text" name="link_url" value="{$friend.link_url}" size="135" class="inpMain" />
+       </dd>
+      </dl>
+      <dl>
+       <dt>排序</dt>
+       <dd>
+        <input type="text" name="sort" value="{$friend.sort}" size="135" class="inpMain" />
+       </dd>
+      </dl>
+      <dl>
+       <input type="hidden" name="token" value="{$token}" />
+       <input type="hidden" name="id" value="{$friend.id}">
+       <input name="submit" class="btn" type="submit" value="{$lang.btn_submit}" />
+      </dl>
+     </div>
+    </form>
+    <!-- {/if} -->
+   </div>
+ </div>
+ {include file="footer.htm"}
+ </div>
+<!-- {if $rec eq 'default'} 文章列表 -->
+<script type="text/javascript">
+{literal}
+onload = function()
+{
+  document.forms['action'].reset();
+}
+
+
+{/literal}
+</script>
+<!-- {else} -->
+{include file="filebox.htm"}
+<!-- {/if} -->
+</body>
+</html>
