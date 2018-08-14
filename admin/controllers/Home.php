@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Login extends MY_Controller {
+class Home extends MY_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -21,18 +21,26 @@ class Login extends MY_Controller {
 	 
 	public function __construct(){
 		parent::__construct();
-		$this->load->model('api/loginModel');
+		$this->load->model('homeModel');
+		$this->load->model('userModel');
 	}
-	public function getWxSessionKey()
-	{	
-		$param = $this->input->get();
-		$keyInfo = $this->loginModel->getWxSessionKey($param);
+	public function index()
+	{
+		print_r($_SERVER);
+	
+		if(isset($_GET['redis'])){
+			$redis = new Redis();
+                	$redis->connect('127.0.0.1',6379);
+                	echo $redis->ping().'<br>';
+                	$redis->set('babadi','www.babadi.top');
+                
+                	$redis_res = $redis->get('babadi');
+                	echo "<font color='green'>".$redis_res."</font>";
+		}
 		
-		Util::echoFormatReturn($code = 200, $keyInfo, $message = '请求成功', $exit = 0);
+		
+		$this->assign('name','后台首页巴巴滴幸运');
+		$this->display('test.html');
 	}
 
-	public function index2(){
-
-		echo 'inext2';
-	}
 }
